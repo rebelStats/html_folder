@@ -77,9 +77,23 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
     return true;
   }
 
-  // On load, complete any OAuth round-trip: if a session now exists, forward to the app.
+  // On load: if the app's "Sign out" sent us here (?signout=1), clear our OWN
+  // Supabase session too and stay on the form — otherwise getSession() below would
+  // forward the still-valid session straight back to the app, an inescapable
+  // sign-out loop. On a normal load, complete any OAuth round-trip and forward.
   React.useEffect(() => {
     if (!sb) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("signout") === "1") {
+      const afterSignOut = () => {
+        params.delete("signout");
+        const qs = params.toString();
+        window.history.replaceState({}, "", window.location.pathname + (qs ? "?" + qs : ""));
+        setMsg({ kind: "ok", text: "Signed out. Sign in to continue." });
+      };
+      sb.auth.signOut().then(afterSignOut, afterSignOut);  // run cleanup on success OR error
+      return; // do NOT auto-forward
+    }
     sb.auth.getSession().then(({ data }) => {
       if (data && data.session) { setMsg({ kind: "ok", text: "Signed in! Redirecting…" }); forward(data.session); }
     });
