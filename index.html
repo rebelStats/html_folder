@@ -95,8 +95,16 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
       return;
     }
     sb.auth.getSession().then(({ data }) => {
-      // Existing session? Offer Continue / Sign out instead of auto-forwarding.
-      if (data && data.session) setSession(data.session);
+      if (!data || !data.session) return; // signed out → show the form
+      // A cached session can be STALE: the app's "Sign out" revokes it on the
+      // server, but it lingers in our localStorage and getSession() doesn't
+      // re-check the server. Offering "Continue" with a dead session forwards it
+      // to the app, which validates server-side, rejects it, and bounces back
+      // here — a loop. So confirm the session is still alive before showing the
+      // "Welcome back" panel; otherwise fall through to the form (sign in fresh).
+      sb.auth.getUser(data.session.access_token).then(function (res) {
+        if (res && !res.error && res.data && res.data.user) setSession(data.session);
+      }, function () { /* revoked / expired / unreachable → leave the form */ });
     });
   }, []);
 
