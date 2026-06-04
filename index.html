@@ -86,6 +86,17 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
     const params = new URLSearchParams(window.location.search);
     if (params.get("signout") === "1") {
       const afterSignOut = () => {
+        // Guarantee the local Supabase session is gone even if signOut() above
+        // returned without clearing it — gotrue can bail on a failed server
+        // round-trip (a network hiccup, or a token the app already revoked),
+        // leaving a stale session that the next plain load would forward right
+        // back into the app: the sign-out loop. Drop the auth token(s) ourselves.
+        try {
+          for (let i = localStorage.length - 1; i >= 0; i--) {
+            const k = localStorage.key(i);
+            if (k && k.startsWith("sb-") && k.endsWith("-auth-token")) localStorage.removeItem(k);
+          }
+        } catch (e) {}
         params.delete("signout");
         const qs = params.toString();
         window.history.replaceState({}, "", window.location.pathname + (qs ? "?" + qs : ""));
