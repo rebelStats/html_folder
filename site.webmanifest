@@ -1,0 +1,11 @@
+{
+  "name": "Python for DS",
+  "short_name": "Python for DS",
+  "icons": [
+    { "src": "favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#14161A",
+  "background_color": "#0E1014",
+  "display": "standalone"
+}
