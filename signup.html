@@ -52,8 +52,6 @@
 // Full landing composition for "Python for DS" sign-in .
 // Layout (per proposed direction):
 //   • full-bleed particle stream (hero-stream.png), flowing left → right toward the form
-//   • top-left: serif headline inside a structured translucent overlay box (high contrast)
-//   • value prop + "Get Started Free" primary CTA below it
 //   • right: "Welcome Back" card — blue "Create an Account" primary + Google secondary
 //   • bottom-left: three feature tiles (Deploy / Analyze / Collaborate)
 //   • footer: nav links + copyright
@@ -234,9 +232,6 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
         .le-link:hover{text-decoration:underline}
         .le-tile{transition:background .18s, border-color .18s, transform .18s}
         .le-tile:hover{background:rgba(255,255,255,.07) !important;transform:translateY(-2px)}
-        .le-getstarted{transition:background .15s, box-shadow .15s, transform .05s}
-        .le-getstarted:hover{background:${accHi};box-shadow:0 12px 34px -10px ${aR(.65)}}
-        .le-getstarted:active{transform:translateY(1px)}
         .le-dot{position:absolute;border-radius:50%;pointer-events:none}
         .le-flow .le-dot{animation:le-stream var(--dur) linear var(--delay) infinite}
         @keyframes le-stream{0%{transform:translate(0,0);opacity:0}14%{opacity:var(--o)}82%{opacity:var(--o)}100%{transform:translate(var(--tx),var(--ty));opacity:0}}
@@ -265,27 +260,7 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
         <div style={{ flex: 1, display: "flex", alignItems: "stretch", gap: "clamp(24px, 3vw, 64px)", minHeight: 0 }}>
 
           {/* LEFT: headline / value prop / tiles */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0, paddingTop: "clamp(4px, 2vh, 30px)", paddingBottom: 26 }}>
-            <div style={{ maxWidth: 640 }}>
-              {/* headline + value prop in one structured overlay box */}
-              <div style={{ display: "inline-block", background: "rgba(8,11,16,.6)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
-                border: "1px solid rgba(255,255,255,.09)", borderRadius: 10, padding: "26px 34px 28px", maxWidth: 600, boxShadow: "0 30px 70px -32px rgba(0,0,0,.7)" }}>
-                <h1 style={{ fontFamily: "var(--serif)", fontWeight: 500, fontSize: "clamp(38px, 4.3vw, 66px)", lineHeight: 1.02, letterSpacing: "-.018em", color: "#fff", margin: 0, textWrap: "balance" }}>
-                  {headline ? headline : <React.Fragment>Break out of<br />your cells!</React.Fragment>}
-                </h1>
-                <p style={{ fontFamily: "var(--sans)", fontSize: "clamp(14.5px, 1.05vw, 17px)", lineHeight: 1.55, color: "rgba(231,234,240,.78)", margin: "18px 0 0", maxWidth: 470, fontWeight: 400 }}>
-                  Practice writing production code in a LeetCode-style environment for data scientists. Solve real production problems, ask a built-in AI teacher your questions, and experiment in a live sandbox.
-                </p>
-              </div>
-
-              {/* primary CTA — only on sign-in (redundant on the sign-up page) */}
-              {!signup &&
-              <a href={signUpHref} className="le-getstarted" style={{ position: "relative", zIndex: 1, isolation: "isolate", display: "inline-flex", alignItems: "center", whiteSpace: "nowrap", marginTop: 24, height: 52, padding: "0 30px", borderRadius: 12, border: "none", background: accent, color: "#fff", textDecoration: "none",
-                fontFamily: "var(--sans)", fontSize: 15.5, fontWeight: 600, cursor: "pointer", letterSpacing: ".005em", boxShadow: `0 12px 28px -16px ${aR(.7)}` }}>
-                Get Started Free
-              </a>
-              }
-            </div>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", minWidth: 0, paddingTop: "clamp(4px, 2vh, 30px)", paddingBottom: 26 }}>
 
             {/* feature tiles */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0,1fr))", gap: 14, maxWidth: 720, marginTop: 28 }}>
