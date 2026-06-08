@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sign Up · Python for DS</title>
+<title>Sign In · Python for DS</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -49,7 +49,7 @@
 </script>
 
 <script type="text/babel" data-presets="react">
-// Full landing composition for "Python for DS" sign-in .
+// Full landing composition for "Python for DS" sign-in.
 // Layout (per proposed direction):
 //   • full-bleed particle stream (hero-stream.png), flowing left → right toward the form
 //   • top-left: serif headline inside a structured translucent overlay box (high contrast)
@@ -63,6 +63,7 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
   const signup = mode === "signup";
   const signUpHref = typeof window !== "undefined" && window.__hrefs && window.__hrefs.signup || "Python%20for%20DS%20-%20Sign%20Up.html";
   const signInHref = typeof window !== "undefined" && window.__hrefs && window.__hrefs.signin || "Python%20for%20DS%20-%20Sign%20In.html";
+  const homeHref = typeof window !== "undefined" && window.__hrefs && window.__hrefs.home || "index.html";
 
   // ── Supabase auth wiring (client is created in the page <head>, exposed as window.__sb) ──
   const sb = typeof window !== "undefined" ? window.__sb : null;
@@ -263,7 +264,7 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
       <div style={{ position: "absolute", inset: 0, zIndex: 3, display: "flex", flexDirection: "column", padding: "40px clamp(40px, 4.6vw, 88px) 0" }}>
         <div style={{ flex: 1, display: "flex", alignItems: "stretch", gap: "clamp(24px, 3vw, 64px)", minHeight: 0 }}>
 
-          {/* LEFT: headline / value prop / tiles */}
+          {/* LEFT: headline / value prop / tiles  */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0, paddingTop: "clamp(4px, 2vh, 30px)", paddingBottom: 26 }}>
             <div style={{ maxWidth: 640 }}>
               {/* headline + value prop in one structured overlay box */}
@@ -394,6 +395,10 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
         {/* ── footer ── */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,.08)", padding: "14px 2px 16px", marginTop: 6, flexShrink: 0 }}>
           <div style={{ display: "flex", gap: 22, alignItems: "center" }}>
+            <a className="le-link" href={homeHref} style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 500, color: "rgba(231,234,240,.62)", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 7 }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10.5 12 3l9 7.5" /><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5" /><path d="M9.5 21v-6h5v6" /></svg>
+              Home
+            </a>
             <a className="le-link" href="https://www.linkedin.com/in/nathankardos/" target="_blank" rel="noreferrer" style={{ fontFamily: "var(--sans)", fontSize: 13, fontWeight: 500, color: "rgba(231,234,240,.62)", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 7 }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" /></svg>
               LinkedIn
@@ -413,7 +418,7 @@ Object.assign(window, { LandingEditorial });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div className="stage">
-    <LandingEditorial mode="signup" card="frosted" accent="#3566B5" motion={true} />
+    <LandingEditorial mode="signin" card="frosted" accent="#3566B5" motion={true} />
   </div>
 );
 </script>
