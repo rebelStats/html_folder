@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sign Up · Python for DS</title>
+<title>Sign In · Python for DS</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -49,7 +49,7 @@
 </script>
 
 <script type="text/babel" data-presets="react">
-// Full landing composition for "Python for DS" sign-in .
+// Full landing composition for "Python for DS" sign-in.
 // Layout (per proposed direction):
 //   • full-bleed particle stream (hero-stream.png), flowing left → right toward the form
 //   • top-left: serif headline inside a structured translucent overlay box (high contrast)
@@ -264,7 +264,7 @@ function LandingEditorial({ card = "white", accent = "#4F86C6", motion = true, h
       <div style={{ position: "absolute", inset: 0, zIndex: 3, display: "flex", flexDirection: "column", padding: "40px clamp(40px, 4.6vw, 88px) 0" }}>
         <div style={{ flex: 1, display: "flex", alignItems: "stretch", gap: "clamp(24px, 3vw, 64px)", minHeight: 0 }}>
 
-          {/* LEFT: headline / value prop / tiles */}
+          {/* LEFT: headline / value prop / tiles  */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0, paddingTop: "clamp(4px, 2vh, 30px)", paddingBottom: 26 }}>
             <div style={{ maxWidth: 640 }}>
               {/* headline + value prop in one structured overlay box */}
@@ -418,7 +418,7 @@ Object.assign(window, { LandingEditorial });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div className="stage">
-    <LandingEditorial mode="signup" card="frosted" accent="#3566B5" motion={true} />
+    <LandingEditorial mode="signin" card="frosted" accent="#3566B5" motion={true} />
   </div>
 );
 </script>
